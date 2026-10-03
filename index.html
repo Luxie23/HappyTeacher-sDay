@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>For You ♥</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;1,500&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#e8b4a0;--cream:#fff1e6;--blush:#f7c6d0;--wine:#2a0f1c}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;color:var(--cream);font-family:'Cormorant Garamond',Georgia,serif;font-size:21px;
+background:radial-gradient(circle at 20% 10%,#5a1d3a 0,transparent 50%),radial-gradient(circle at 90% 90%,#7a2b45 0,transparent 45%),var(--wine);
+padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0);overflow-x:hidden}
+h1,h2{font-family:'Playfair Display',Georgia,serif;font-style:italic;font-weight:500;color:var(--gold);margin:.3em 0}
+h1{font-size:2.5rem}h2{font-size:2rem}
+.s{display:none;max-width:560px;margin:0 auto;padding:70px 22px 40px;text-align:center;animation:in .9s}
+.s.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(16px)}to{opacity:1}}
+button{font-family:inherit;font-size:1.1rem;letter-spacing:.06em;padding:12px 28px;margin:8px;border:1px solid var(--gold);background:transparent;color:var(--cream);border-radius:40px;cursor:pointer;transition:.3s}
+button:hover{background:var(--gold);color:var(--wine)}
+.seal{font-size:4.5rem;animation:beat 1.6s infinite}
+@keyframes beat{50%{transform:scale(1.12)}}
+.sub{font-style:italic;opacity:.85}
+#no{position:relative}
+.reasons{display:grid;gap:16px;margin:22px 0}
+.flip{perspective:800px;height:110px;cursor:pointer}
+.flip div{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:14px;border:1px solid var(--gold);border-radius:14px;backface-visibility:hidden;transition:transform .7s;background:rgba(255,255,255,.05)}
+.flip{position:relative}
+.flip .b{transform:rotateY(180deg);background:rgba(232,180,160,.15);font-style:italic}
+.flip.on .f{transform:rotateY(-180deg)}.flip.on .b{transform:rotateY(0)}
+.wall{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:20px 0}
+.fr{padding:8px;border:1px solid var(--gold);border-radius:120px 120px 10px 10px;background:rgba(255,255,255,.04)}
+.ph{aspect-ratio:3/4;border-radius:110px 110px 6px 6px;background:linear-gradient(160deg,#5a1d3a,#3a1428);display:flex;align-items:center;justify-content:center;font-size:2.2rem;overflow:hidden}
+.ph img{width:100%;height:100%;object-fit:cover}
+.fr small{display:block;font-style:italic;margin-top:6px;color:var(--blush)}
+.paper{background:rgba(255,241,230,.07);border:1px solid var(--gold);border-radius:8px;padding:22px;text-align:left}
+#msg{white-space:pre-line;min-height:240px;line-height:1.55}
+#reward{display:none;margin-top:16px;border-style:dashed}
+.burger{position:fixed;top:calc(env(safe-area-inset-top,0px) + 16px);right:16px;z-index:20;width:46px;height:46px;padding:0;margin:0;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;border-radius:50%;background:var(--wine)}
+.burger span{display:block;width:20px;height:2px;background:var(--gold);transition:.3s}
+.burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.menu{position:fixed;top:0;right:0;height:100%;width:250px;background:#1c0812;border-left:1px solid var(--gold);padding:85px 24px;transform:translateX(100%);transition:.4s;z-index:15;text-align:left}
+.menu.open{transform:none}
+.menu h3{font-family:'Playfair Display',serif;font-style:italic;color:var(--gold);font-weight:500;margin:0 0 12px}
+.menu a{display:block;padding:11px 0;color:var(--cream);border-bottom:1px solid rgba(232,180,160,.25);cursor:pointer}
+.menu a:hover{color:var(--gold)}
+.pet{position:fixed;top:-30px;pointer-events:none;z-index:1;animation:fall linear forwards;opacity:.7}
+@keyframes fall{to{transform:translateY(110vh) rotate(300deg)}}
+</style></head>
+<body>
+<button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+<nav class="menu" id="menu">
+  <h3>Our little corner</h3>
+  <a data-go="1">The Beginning</a><a data-go="2">Why You</a><a data-go="3">Our Memories</a><a data-go="4">A Letter</a>
+</nav>
+
+<section class="s on" id="s1">
+  <div class="seal">💌</div>
+  <h1>For <span class="nm"></span></h1>
+  <p class="sub">Happy Teacher's Day, Ma'am Claudine. I made this simple website just for you and I hope you appreciate it.</p>
+  <button onclick="go(2)">Open it</button>
+  <button id="no">Open it later</button>
+  <p id="hint" class="sub" style="font-size:17px"></p>
+</section>
+
+<section class="s" id="s2">
+  <h2>Why you'll always be the best teacher for me?</h2>
+  <p class="sub">Tap each card, mahal. haha</p>
+  <div class="reasons" id="reasons"></div>
+  <button onclick="go(3)">Continue</button>
+</section>
+
+<section class="s" id="s3">
+  <h2>Moments I keep</h2>
+  <p class="sub">Every one of them, my favorite lesson.</p>
+  <div class="wall" id="wall"></div>
+  <button onclick="go(4)">One more thing</button>
+</section>
+
+<section class="s" id="s4">
+  <h2>A letter for you</h2>
+  <div class="paper"><div id="msg"></div></div>
+  <button id="claim" style="display:none" onclick="claim()">Claim your gift</button>
+  <div class="paper" id="reward"></div>
+</section>
+
+<script>
+/* EDIT THESE */
+const NAME = "my love";
+const REASONS = [
+ ["Patience", "Even when you're ready to eat a student alive for cheating, you still keep your teacher mode on.."],
+ ["Passion", "You don't just teach. You genuinely love what you do—and that's one of the things I love about you."],
+ ["Strength", "Even when you're sick, you still go to work. Baby, that's not strength. That's stubbornness."],
+ ["Wisdom", "You're smart, I'm smart. We're basically the perfect pair. No wonder you chose me."]
+];
+const PHOTOS = [
+  {img:"pictures/photo_2026-09-30_17-34-50.jpg", cap:"Us"},
+  {img:"pictures/photo_2026-09-30_17-36-29.jpg", cap:"Your smile. Sa sunod dapat nakalabas na ngipin sa cam ha?"},
+  {img:"pictures/photo_2026-09-30_17-43-43.jpg", cap:"My favorite day cos why not?"},
+  {img:"pictures/5ec2b739-d513-43c2-a8fd-dcbbb021a2d7.jpg", cap:"Still my favorite view. Still my favorite girl. Always. ❤️ "} ];
+const MESSAGE = `Hi, wifey,
+
+What a lovely morning, haha. Happy Teacher’s Day to my one and only favorite teacher. ❤️
+
+Even though you’re still working in the office for now and haven’t had your own classroom yet, I already know that teaching is something you genuinely love. And honestly, I’m already proud of the teacher you’re going to become.
+
+To your future students, though, I have a little warning for you guys
+
+Don't think you can win her over just by giving her gifts. That won't work on her. HAHAHA.
+
+Siya ang tipo ng teacher na mapapanginginig ka tuwing nasa klase ka. haha But don't worry, future students, panalo pa rin kayo because you're going to learn a lot from her. She's going to be strict when she needs to be, but I know she'll also be the kind of teacher who genuinely cares about her students.
+
+And knowing how passionate you are about teaching, I know you'll give your best when the time finally comes.
+
+Enjoy your day, wifey. You deserve it.
+
+I'm so proud of you, and I love you so much.
+
+TraderMongIT♥`;
+const REWARD = "One dinner date, one long hug, kiss, and my full attention. No trade uli hahaha pero utang muna kasi wala ako diyan";
+/* ---------- */
+
+document.querySelectorAll('.nm').forEach(e=>e.textContent=NAME);
+function go(n){document.querySelectorAll('.s').forEach(s=>s.classList.remove('on'));document.getElementById('s'+n).classList.add('on');window.scrollTo(0,0);if(n==4)type();}
+
+const no=document.getElementById('no'),hints=["Nice try 😏","This button is shy.","You can't escape love.","Just press 'Open it' ♥"];let h=0;
+function dodge(e){e.preventDefault();no.style.left=(Math.random()*140-70)+'px';no.style.top=(Math.random()*100-30)+'px';document.getElementById('hint').textContent=hints[h++%hints.length]}
+['mouseover','touchstart','click'].forEach(ev=>no.addEventListener(ev,dodge,{passive:false}));
+
+const rb=document.getElementById('reasons');
+REASONS.forEach(r=>{const d=document.createElement('div');d.className='flip';
+ d.innerHTML=`<div class="f"><b>${r[0]}</b></div><div class="b">${r[1]}</div>`;d.onclick=()=>d.classList.toggle('on');rb.appendChild(d)});
+
+const w=document.getElementById('wall');
+PHOTOS.forEach(p=>{const d=document.createElement('div');d.className='fr';
+ d.innerHTML=`<div class="ph">${p.img?`<img src="${p.img}" alt="">`:'♥'}</div><small>${p.cap}</small>`;w.appendChild(d)});
+
+let typed=false;
+function type(){if(typed)return;typed=true;const el=document.getElementById('msg');let i=0;
+ const t=setInterval(()=>{el.textContent=MESSAGE.slice(0,++i);if(i>=MESSAGE.length){clearInterval(t);document.getElementById('claim').style.display='inline-block'}},35)}
+function claim(){const r=document.getElementById('reward');r.textContent=REWARD;r.style.display='block';petals(30)}
+
+function petals(n){for(let i=0;i<n;i++){const s=document.createElement('span');s.className='pet';s.textContent=['🌹','♥','🌸'][i%3];
+ s.style.left=Math.random()*100+'vw';s.style.fontSize=(14+Math.random()*16)+'px';s.style.animationDuration=(5+Math.random()*5)+'s';s.style.animationDelay=Math.random()*2+'s';
+ document.body.appendChild(s);setTimeout(()=>s.remove(),12000)}}
+petals(10);setInterval(()=>petals(2),2500);
+
+const burger=document.getElementById('burger'),menu=document.getElementById('menu');
+burger.onclick=()=>{burger.classList.toggle('open');menu.classList.toggle('open')};
+menu.querySelectorAll('a').forEach(a=>a.onclick=()=>{go(+a.dataset.go);burger.classList.remove('open');menu.classList.remove('open')});
+</script></body></html>
